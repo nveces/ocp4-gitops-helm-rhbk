@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>tech.nveces.ocp.rhbk</groupId>
+    <artifactId>ocp4-rhbk-external-db</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>ocp4-rhbk-external-db</name>
+    <packaging>pom</packaging>
+    <url>https://nveces.tech/</url>
+    <inceptionYear>2025</inceptionYear>
+    <organization>
+        <name>Nveces Tech</name>
+        <url>https://nveces.tech/</url>
+    </organization>
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <!-- Change me for the customer URL -->
+            <url>${custom.maven.url}</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus</id>
+            <!-- Change me for the customer URL -->
+            <url>${custom.maven.url}</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    <developers>
+        <developer>
+            <name>Nveces</name>
+            <email>nveces@gmail.com</email>
+            <organization>Nveces Tech</organization>
+            <organizationUrl>https://nveces.tech/</organizationUrl>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone />
+        </developer>
+    </developers>
+    <properties>
+        <!-- ========================== -->
+        <!-- maven exclusive properties -->
+        <!-- ========================== -->
+        <maven.test.skip>true</maven.test.skip>
+        <maven.test.failure.ignore>true</maven.test.failure.ignore>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyy-MM-dd_HH:mm:ss</maven.build.timestamp.format>
+        <createChecksum>true</createChecksum>
+        <!-- ===================== -->
+        <!-- Dependencies versions -->
+        <!-- ===================== -->
+        <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
+        <maven-dependency-plugin.version>3.7.1</maven-dependency-plugin.version>
+        <!-- ================= -->
+        <!-- Others Properties -->
+        <!-- ================= -->
+        <!-- <oracle.jdbc.version>23.3.0.23.09</oracle.jdbc.version> -->
+        <oracle.jdbc.version>23.7.0.25.01</oracle.jdbc.version>
+        <custom.maven.url>
+            https://nexus3-global-nexus3.apps.ocp.sandbox5308.opentlc.com/repository/maven-public/</custom.maven.url>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${maven-dependency-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>copy-oracle-jars</id>
+                        <!-- <phase>package</phase> -->
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/libs</outputDirectory>
+                            <includeGroupIds>
+                                com.oracle.database.jdbc,com.oracle.database.nls</includeGroupIds>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <!-- ORACLE JDBC Drivers -->
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc17</artifactId>
+            <version>${oracle.jdbc.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ucp17</artifactId>
+            <version>${oracle.jdbc.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.database.nls</groupId>
+            <artifactId>orai18n</artifactId>
+            <version>${oracle.jdbc.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+</project>
