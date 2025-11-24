@@ -51,7 +51,7 @@ ENV KC_TRANSACTION_XA_ENABLED=false
 #ENV KC_LEGACY_OBSERVABILITY_INTERFACE=true
 #
 #ENV JAVA_OPTS='-javaagent:/opt/keycloak/opentelemetry/opentelemetry-javaagent.jar'
-#Add opentelemetry
+# Add opentelemetry
 #COPY --chown=keycloak:keycloak opentelemetry/opentelemetry-javaagent.jar /opt/keycloak/opentelemetry/
 
 ENV KC_FEATURES="preview,hostname:v2,token-exchange"
