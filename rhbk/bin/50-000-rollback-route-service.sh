@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # ============================================================
-# Red Hat Consulting EMEA, 2025
+#
 #
 # ============================================================
 # Description---: ROLLBACK migrate route to new service and update labels
