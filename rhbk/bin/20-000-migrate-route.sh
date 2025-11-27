@@ -101,6 +101,9 @@ rm -f "${ANNOTATE_FILE_PATH}"
 # Step 12: Migrate route to new service
 oc patch route ${ROUTE_NAME} -n ${PRJ_NAME} --type=json -p '[{"op": "replace", "path": "/spec/to/name", "value": "rhbk"}]'
 
+# Step 13: Add targetPort to https
+oc patch route ${ROUTE_NAME} -n ${PRJ_NAME} --type=json -p '[{"op": "add", "path": "/spec/port/targetPort", "value": "https"}]'
+
 exit 0
 
 #
